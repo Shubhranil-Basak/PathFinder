@@ -6,7 +6,6 @@ import google.generativeai as genai
 load_dotenv()
 
 API = os.environ.get("API")
-print(API)
 
 
 genai.configure(api_key=API)

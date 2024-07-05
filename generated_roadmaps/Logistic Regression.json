@@ -1,0 +1,110 @@
+[
+    {
+        "title": "Logistic Regression",
+        "items": [
+            {
+                "title": "Introduction to Logistic Regression",
+                "subitems": [
+                    "Definition and Purpose",
+                    "Binary Classification Problems",
+                    "Sigmoid Function",
+                    "Odds and Log Odds"
+                ]
+            },
+            {
+                "title": "Model Building and Training",
+                "subitems": [
+                    "Data Preparation and Feature Engineering",
+                    "Choosing a Cost Function (Log Loss)",
+                    "Gradient Descent and Optimization Algorithms",
+                    "Regularization Techniques"
+                ]
+            },
+            {
+                "title": "Model Evaluation and Interpretation",
+                "subitems": [
+                    "Confusion Matrix",
+                    "Accuracy, Precision, Recall, F1-Score",
+                    "ROC Curve and AUC",
+                    "Feature Importance"
+                ]
+            },
+            {
+                "title": "Assumptions of Logistic Regression",
+                "subitems": [
+                    "Linearity of Relationship",
+                    "Independence of Observations",
+                    "Absence of Multicollinearity",
+                    "Sufficient Sample Size"
+                ]
+            },
+            {
+                "title": "Overcoming Challenges",
+                "subitems": [
+                    "Dealing with Imbalanced Datasets",
+                    "Handling Categorical Features",
+                    "Feature Scaling and Standardization"
+                ]
+            },
+            {
+                "title": "Applications of Logistic Regression",
+                "subitems": [
+                    "Credit Risk Assessment",
+                    "Spam Detection",
+                    "Medical Diagnosis",
+                    "Customer Churn Prediction"
+                ]
+            },
+            {
+                "title": "Comparison with Other Models",
+                "subitems": [
+                    "Decision Trees",
+                    "Support Vector Machines (SVMs)",
+                    "Naive Bayes",
+                    "Neural Networks"
+                ]
+            },
+            {
+                "title": "Advanced Techniques",
+                "subitems": [
+                    "L1 and L2 Regularization",
+                    "Cross-Validation",
+                    "Ensemble Methods"
+                ]
+            },
+            {
+                "title": "Python Implementation",
+                "subitems": [
+                    "Using Scikit-learn Library",
+                    "Creating and Training a Logistic Regression Model",
+                    "Evaluating Model Performance",
+                    "Making Predictions"
+                ]
+            },
+            {
+                "title": "Real-World Case Studies",
+                "subitems": [
+                    "Examples of Logistic Regression Applications",
+                    "Industry-Specific Use Cases",
+                    "Best Practices and Lessons Learned"
+                ]
+            },
+            {
+                "title": "Resources and Further Learning",
+                "subitems": [
+                    "Books and Online Courses",
+                    "Research Papers and Articles",
+                    "Online Communities and Forums"
+                ]
+            },
+            {
+                "title": "Future Trends",
+                "subitems": [
+                    "Logistic Regression Extensions",
+                    "Advancements in Optimization Techniques",
+                    "Integration with Deep Learning"
+                ]
+            }
+        ]
+    }
+]

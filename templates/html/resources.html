@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload topic</title>
+    <script src="{{ url_for('static', filename='js/resources.js') }}" defer></script>
+    <link href="{{ url_for('static', filename='css/resources.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>Get Resources</h1>
+    <p>Enter the topic and get resource for it</p>
+    <form action="/resource" method="post" enctype="multipart/form-data">
+        <fieldset>
+
+            <label for="topic">Enter Topic <input type="text" id="topic" name="topic"></label>
+            <br><br>
+            <label for="resource_file">Upload .md File (optional): <input type="file" id="resource_file" name="resource_file" accept=".md"></label>
+        
+        </fieldset>
+        <fieldset>
+            <div>For option blocks</div>
+        </fieldset>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

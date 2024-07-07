@@ -1,0 +1,41 @@
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background-color: hsl(240, 30%, 15%);
+    color: #f5f6f7;
+    font-family: Tahoma;
+    font-size: 16px;
+}
+
+#mynetwork {
+    height: 500px;
+    border: 1px solid lightgray;
+    overflow: hidden;
+    background-color: hsla(240, 38%, 41%, 0.627);
+}
+
+#controls {
+    margin-top: 1%;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.control-button {
+    display: inline;
+    width: 20%;
+    margin: 1em 6rem;
+    height: 2em;
+    font-size: 1.1rem;
+    background-color: #3b3b4f;
+    border-color: white;
+    min-width: 300px;
+    align-items: center;
+    color: white;
+}
+
+h1{
+    color: white;
+    text-align: center;
+}

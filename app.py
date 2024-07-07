@@ -3,7 +3,6 @@ import subprocess
 import json
 import os
 
-
 app = Flask(__name__)
 SAVE_DIRECTORY = "generated_roadmaps"
 SAVE_RESOURCES = "generated_resources"
@@ -71,6 +70,20 @@ def index():
             return "Please provide either a topic or a .md file.", 400
 
     return render_template('html/index.html')
+
+@app.route('/roadmap/<topic>.json')
+def get_roadmap_json(topic):
+    file_path = os.path.join(SAVE_DIRECTORY, f"{topic}.json")
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as f:
+            roadmap_data = json.load(f)
+        return jsonify(roadmap_data)
+    else:
+        return "File not found", 404
+
+@app.route('/view/<topic>')
+def view_roadmap(topic):
+    return render_template('html/view_roadmap.html', topic=topic)
 
 if __name__ == '__main__':
     app.run(debug=True)

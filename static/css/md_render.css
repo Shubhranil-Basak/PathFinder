@@ -1,0 +1,67 @@
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-25%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#yt-news-container::-webkit-scrollbar {
+    display: none;
+}
+
+#yt-tutorial-container::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-button.left {
+    left: 0;
+}
+
+.scroll-button.right {
+    right: 0;
+}
+
+.hidden{
+    display: none;
+}
+
+#yt-news-container{
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    visibility: hidden;
+    display: flex;
+    scroll-behavior: smooth;
+}
+
+#yt-tutorial-container{
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    visibility: hidden;
+    display: flex;
+    scroll-behavior: smooth;
+}
+
+#box-1, #box-2{
+    width: 50%;
+    height: 200px;
+    display: flex;
+    color: white;
+    overflow-y: auto;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+#box-1{
+    background-color: red;
+}
+
+#box-2{
+    background-color: blue;
+}

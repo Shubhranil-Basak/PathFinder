@@ -13,7 +13,6 @@ if not os.path.exists(SAVE_DIRECTORY):
 if not os.path.exists(SAVE_RESOURCES):
     os.makedirs(SAVE_RESOURCES)
 
-
 def parse_md_to_json(md_content):
     lines = md_content.split('\n')
     roadmap = []
@@ -81,9 +80,28 @@ def get_roadmap_json(topic):
     else:
         return "File not found", 404
 
+@app.route('/download/<topic>')
+def download(topic):
+    file_path = os.path.join(SAVE_DIRECTORY, f"{topic}.md")
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True)
+    else:
+        return "File not found", 404
+
+
+
 @app.route('/view/<topic>')
 def view_roadmap(topic):
     return render_template('html/view_roadmap.html', topic=topic)
+
+@app.route('/view_md/<topic>')
+def view_md(topic):
+    return render_template('html/md_render.html', topic=topic)
+
+
+@app.route('/resources.html')
+def resources():
+    return render_template('html/resources.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

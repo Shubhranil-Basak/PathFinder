@@ -70,6 +70,27 @@ def index():
 
     return render_template('html/index.html')
 
+@app.route('/resource', methods=['GET', 'POST'])
+def resource():
+    if request.method == 'POST':
+        topic = request.form.get('topic', '').strip()
+        file = request.files.get('resource_file')
+
+        if file and file.filename.endswith('.md'):
+            file_path = os.path.join(SAVE_RESOURCES, file.filename)
+            file.save(file_path)
+            topic = (os.path.splitext(file.filename)[0])
+            topic = topic.replace('_resource', "")
+            return redirect(url_for('view_md', topic=topic))
+        elif topic:
+            # Call the Python script with the topic if no file is uploaded
+            subprocess.run(['python', 'resources.py', topic, SAVE_RESOURCES])
+            return redirect(url_for('view_md', topic=topic))
+        else:
+            return "Please provide either a topic or a .md file.", 400
+        
+    return render_template('html/resources.html')
+
 @app.route('/roadmap/<topic>.json')
 def get_roadmap_json(topic):
     file_path = os.path.join(SAVE_DIRECTORY, f"{topic}.json")
@@ -87,6 +108,18 @@ def download(topic):
         return send_file(file_path, as_attachment=True)
     else:
         return "File not found", 404
+
+@app.route('/resources/<topic>_resource.md')
+def get_resource_md(topic):
+    file_path = os.path.join(SAVE_RESOURCES, f"{topic}_resource.md")
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as f:
+            resource_data = f.read()
+        return resource_data
+    else:
+        return "File not found", 404
+
+
 
 
 

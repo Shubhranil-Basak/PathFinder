@@ -91,6 +91,14 @@ def resource():
         
     return render_template('html/resources.html')
 
+@app.route('/download/<topic>')
+def download(topic):
+    file_path = os.path.join(SAVE_DIRECTORY, f"{topic}.md")
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True)
+    else:
+        return "File not found", 404
+
 @app.route('/roadmap/<topic>.json')
 def get_roadmap_json(topic):
     file_path = os.path.join(SAVE_DIRECTORY, f"{topic}.json")
@@ -98,14 +106,6 @@ def get_roadmap_json(topic):
         with open(file_path, 'r') as f:
             roadmap_data = json.load(f)
         return jsonify(roadmap_data)
-    else:
-        return "File not found", 404
-
-@app.route('/download/<topic>')
-def download(topic):
-    file_path = os.path.join(SAVE_DIRECTORY, f"{topic}.md")
-    if os.path.exists(file_path):
-        return send_file(file_path, as_attachment=True)
     else:
         return "File not found", 404
 
@@ -119,9 +119,39 @@ def get_resource_md(topic):
     else:
         return "File not found", 404
 
+@app.route('/resources/<topic> Latest News.json')
+def get_resource_News_json(topic):
+    if not os.path.exists(os.path.join(SAVE_RESOURCES, f"{topic} Latest News.json")):
+        subprocess.run(['python', 'YT.py', topic, SAVE_RESOURCES])
+        file_path = os.path.join(SAVE_RESOURCES, f"{topic} Latest News.json")
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as f:
+                resource_data = json.load(f)
+            return jsonify(resource_data)
+        else:
+            return "File not found", 404
+    else:
+        file_path = os.path.join(SAVE_RESOURCES, f"{topic} Latest News.json")
+        with open(file_path, 'r') as f:
+            resource_data = json.load(f)
+        return jsonify(resource_data)
 
-
-
+@app.route('/resources/<topic> Tutorial.json')
+def get_resource_Tutorial_json(topic):
+    if not os.path.exists(os.path.join(SAVE_RESOURCES, f"{topic} Tutorial.json")):
+        subprocess.run(['python', 'YT.py', topic, SAVE_RESOURCES])
+        file_path = os.path.join(SAVE_RESOURCES, f"{topic} Tutorial.json")
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as f:
+                resource_data = json.load(f)
+            return jsonify(resource_data)
+        else:
+            return "File not found", 404
+    else:
+        file_path = os.path.join(SAVE_RESOURCES, f"{topic} Tutorial.json")
+        with open(file_path, 'r') as f:
+            resource_data = json.load(f)
+        return jsonify(resource_data)
 
 @app.route('/view/<topic>')
 def view_roadmap(topic):
@@ -135,6 +165,7 @@ def view_md(topic):
 @app.route('/resources.html')
 def resources():
     return render_template('html/resources.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,105 +1,103 @@
 fetch(`/roadmap/${topic}.json`)
     .then(response => response.json())
     .then(data => {
-        const nodes = [];
-        const edges = [];
-        let nodeId = 1;
-
-        function addNode(label, parentId = null, group = 'default') {
-            const id = nodeId++;
-            nodes.push({ id, label, group });
-            if (parentId !== null) {
-                edges.push({ from: parentId, to: id });
+        function renderTree() {
+            const rootData = {
+              name: data[0].title,
+              children: data[0].items.map((item) => ({
+                name: item.title,
+                children: item.subitems.map((subitem) => ({ name: subitem })),
+              })),
+            };
+          
+            const width = window.innerWidth - 20;
+            const height = window.innerHeight - 120;
+          
+            const svg = d3
+              .select("#mynetwork")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height)
+              .call(d3.zoom().on("zoom", zoomed))
+              .append("g")
+              .attr("transform", "translate(80,10)");
+          
+            // Current transform state
+            let currentTransform = d3.zoomIdentity;
+          
+            // Handle zoom events for other interactions
+            function zoomed(event) {
+              currentTransform = event.transform;
+              svg.attr("transform", currentTransform);
             }
-            return id;
-        }
-
-        data.forEach(section => {
-            const sectionId = addNode(section.title);
-            section.items.forEach(item => {
-                const itemId = addNode(item.title, sectionId, 'parent');
-                item.subitems.forEach(subitem => {
-                    addNode(subitem, itemId, 'leaf');
-                });
-            });
-        });
-
-        const container = document.getElementById('mynetwork');
-        const networkData = {
-            nodes: new vis.DataSet(nodes),
-            edges: new vis.DataSet(edges)
-        };
-        const options = {
-            layout: {
-                hierarchical: {
-                    enabled: true,
-                    direction: 'LR', // Left to Right direction
-                    sortMethod: 'directed', // Sort method for the tree layout
-                    nodeSpacing: 200, // Adjusted node spacing
-                    levelSeparation: 300, // Adjusted level separation
-                }
-            },
-            interaction: {
-                dragView: true, // Enable dragging/panning
-                zoomView: false // Disable zoom on scroll
-            },
-            physics: false // Disable physics to prevent automatic repositioning
-        };
-        const network = new vis.Network(container, networkData, options);
-
-        container.addEventListener('wheel', function (event) {
-            event.preventDefault();
-            const direction = event.deltaY > 0 ? -0.4 : 0.4;
-            const viewPosition = network.getViewPosition();
-            const moveAmount = 50; // Amount of pixels to move
-
-            network.moveTo({
-                position: { x: viewPosition.x, y: viewPosition.y - direction * moveAmount },
-                offset: { x: 0, y: 0 },
-                animation: true
-            });
-        });
-
-        document.getElementById('zoomIn').onclick = function () {
-            const scale = network.getScale();
-            network.moveTo({
-                scale: scale * 1.2
-            });
-        };
-
-        document.getElementById('zoomOut').onclick = function () {
-            const scale = network.getScale();
-            network.moveTo({
-                scale: scale / 1.2
-            });
-        };
-
-        // Add event listener for node click
-        network.on('click', function (params) {
-            var node = network.getNodeAt(params.pointer.DOM);
-            if (node !== undefined) {
-                var nodeName = nodes[node - 1].label;
-                copyToClipboard(nodeName);
-            }
-        });
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function () {
-            }, function (err) {
-                console.error('Could not copy text: ', err);
-            });
-        }
-
-        let scale_ = network.getScale();
-        network.moveTo({
-            scale: scale_*10 
-        })
+          
+            // Handle wheel events for panning
+            d3.select("#mynetwork")
+              .select("svg")
+              .on("wheel", (event) => {
+                event.preventDefault();
+                const { deltaX, deltaY } = event;
+                currentTransform = currentTransform.translate(-deltaX, -deltaY);
+                svg.attr("transform", currentTransform);
+              });
+          
+            const treeLayout = d3
+              .tree()
+              .size([height - height / 10, width - width / 3])
+              .separation(
+                (a, b) => (a.parent === b.parent ? 1 : 2) + (a.depth === 2 ? 0.5 : 0)
+              ); // Adjust separation for leaf nodes
+          
+            const root = d3.hierarchy(rootData);
+          
+            treeLayout(root);
+          
+            const link = svg
+              .selectAll(".link")
+              .data(root.links())
+              .enter()
+              .append("path")
+              .attr("class", "link")
+              .attr(
+                "d",
+                d3
+                  .linkHorizontal()
+                  .x((d) => d.y)
+                  .y((d) => d.x)
+              );
+          
+            const node = svg
+              .selectAll(".node")
+              .data(root.descendants())
+              .enter()
+              .append("g")
+              .attr("class", "node")
+              .attr("transform", (d) => `translate(${d.y},${d.x})`)
+              .on("click", (event, d) => {
+                navigator.clipboard.writeText(d.data.name)
+              });
+          
+            node.append("circle").attr("r", 5);
+          
+            node
+              .append("text")
+              .attr("dy", 3)
+              .attr("x", (d) => (d.children ? -8 : 8))
+              .style("text-anchor", (d) => (d.children ? "end" : "start"))
+              .text((d) => d.data.name);
+          }
+          
+          // Initial render
+          renderTree();
+          
+          document.getElementById("reloadBtn").addEventListener("click", () => {
+            // Clear the existing SVG
+            d3.select("#mynetwork").select("svg").remove();
+            renderTree();
+          });
     })
-    .catch(error => console.error('Error fetching roadmap JSON:', error));
 
-
-document.getElementById('resources').onclick = function () {
-    window.open('/resources.html', '_blank');
-
-}
-
+    document.getElementById('resource').onclick = function () {
+        window.open('/resources.html', '_blank');
+    
+    }

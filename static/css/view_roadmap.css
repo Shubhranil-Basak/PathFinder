@@ -1,41 +1,100 @@
+.node circle {
+    fill: #ebdcdc;
+    stroke: rgb(24, 25, 26);
+    stroke-width: 3px;
+    cursor: pointer;
+}
+.node text {
+    font: 12px sans-serif;
+}
+.link {
+    fill: none;
+    stroke: #0cdc25f7;
+    stroke-opacity: 0.4;
+    stroke-width: 1.5px;
+}
+
+
 body {
     width: 100%;
-    height: 100vh;
+    height: 10%;
     margin: 0;
-    background-color: hsl(240, 30%, 15%);
-    color: #f5f6f7;
+    background-color: #74c0e6;
+    color: #01080f;
     font-family: Tahoma;
     font-size: 16px;
+    cursor: grabbing;
 }
 
-#mynetwork {
-    height: 500px;
-    border: 1px solid lightgray;
-    overflow: hidden;
-    background-color: hsla(240, 38%, 41%, 0.627);
+h1,
+p {
+    color: white;
+    text-align: center;
 }
 
-#controls {
-    margin-top: 1%;
-    display: flex;
-    align-content: center;
-    flex-wrap: wrap;
+form {
+    width: 60vw;
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0 auto;
+    padding-bottom: 2em;
 }
 
-.control-button {
-    display: inline;
-    width: 20%;
-    margin: 1em 6rem;
+fieldset {
+    border: none;
+    padding: 2rem 0;
+    border-bottom: 3px solid #4f4a3b;
+}
+
+fieldset:last-of-type {
+    border-bottom: none;
+}
+
+input {
+    margin: 10px 0 0 0;
+    width: 100%;
+    min-height: 2em;
+}
+
+input {
+    background-color: #231a0a;
+    border: 1px solid #0a0a23;
+    color: blue;
+}
+
+.inline {
+    width: unset;
+    margin: 0 0.5em 0 0;
+    vertical-align: middle;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 60%;
+    margin: 1em auto;
     height: 2em;
     font-size: 1.1rem;
     background-color: #3b3b4f;
     border-color: white;
     min-width: 300px;
-    align-items: center;
-    color: white;
 }
 
-h1{
-    color: white;
-    text-align: center;
+#mynetwork {
+    border: 1px solid black;
+    overflow: hidden;
+    background-color: #c9dce5;
+    height: 100%;
+    width: auto;
+}
+
+#mynetwork svg{
+    width: 100%;
+    height: 590px;
+}
+
+#reloadBtn, #resource {
+    margin-left: 20%;
+    margin-right: 20%;
+    border: none;
+    margin-top: calc(1.5em + 1.5px);
 }

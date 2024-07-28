@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>View Roadmap</title>
     <!-- <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script> -->
     <!-- <link href="https://unpkg.com/vis-network/styles/vis-network.min.css" rel="stylesheet" type="text/css" /> -->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/vis-network.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/view_roadmap.js') }}" defer></script>
-    <link href="{{ url_for('static', filename='css/vis-network.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='css/view_roadmap.css') }}" rel="stylesheet" type="text/css" />
-</head>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/vis-network.min.js') }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/view_roadmap.js') }}"
+      defer
+    ></script>
+    <!-- <link href="{{ url_for('static', filename='css/vis-network.min.css') }}" rel="stylesheet" type="text/css" /> -->
+    <link
+      href="{{ url_for('static', filename='css/view_roadmap.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
 
-<body>
-    <script>const topic = "{{ topic }}";</script>
+  <body>
+    <script>
+      const topic = "{{ topic }}";
+    </script>
     <h1>Roadmap for {{ topic }}</h1>
     <div id="mynetwork"></div>
-    <input type="button" class="control-button" id="resources" value="Get Resources">
-    <input type="button" class="control-button" id="zoomIn" value="Zoom In">
-    <input type="button" class="control-button" id="zoomOut" value="Zoom Out">
-</body>
 
+    <button id="reloadBtn"><b>Reload Tree</b></button>
+    <button id="resource"><b>Get resources</b></button>
+  </body>
 </html>

@@ -10,7 +10,7 @@
     z-index: 10;
 }
 
-#yt-news-container::-webkit-scrollbar {
+/* #yt-news-container::-webkit-scrollbar {
     display: none;
 }
 
@@ -24,7 +24,7 @@
 
 .scroll-button.right {
     right: 0;
-}
+} */
 
 .hidden{
     display: none;
@@ -34,7 +34,7 @@
     width: 100%;
     overflow-x: auto;
     white-space: nowrap;
-    visibility: hidden;
+    visibility: visible;
     display: flex;
     scroll-behavior: smooth;
 }
@@ -43,7 +43,7 @@
     width: 100%;
     overflow-x: auto;
     white-space: nowrap;
-    visibility: hidden;
+    visibility: visible;
     display: flex;
     scroll-behavior: smooth;
 }

@@ -61,6 +61,6 @@ if __name__ == '__main__':
     topic = sys.argv[1]
     save_directory = sys.argv[2]
     topic_tutorial = topic + " Tutorial"
-    topic_news = topic + " related News"
+    topic_news = topic + " Latest News"
     tutorial_json = tutorial_vid(topic_tutorial, save_directory)
     news_json = news_vid(topic_news, save_directory)

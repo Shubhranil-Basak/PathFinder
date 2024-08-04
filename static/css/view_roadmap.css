@@ -1,6 +1,6 @@
 .node circle {
     fill: #ebdcdc;
-    stroke: rgb(24, 25, 26);
+    stroke: rgb(200, 24, 59);
     stroke-width: 3px;
     cursor: pointer;
 }
@@ -19,8 +19,8 @@ body {
     width: 100%;
     height: 10%;
     margin: 0;
-    background-color: #74c0e6;
-    color: #01080f;
+    background-color: #031925;
+    color: #e7e7f1;
     font-family: Tahoma;
     font-size: 16px;
     cursor: grabbing;
@@ -82,7 +82,7 @@ input[type="submit"] {
 #mynetwork {
     border: 1px solid black;
     overflow: hidden;
-    background-color: #c9dce5;
+    background-color: #b9f2f2;
     height: 100%;
     width: auto;
 }
@@ -92,9 +92,24 @@ input[type="submit"] {
     height: 590px;
 }
 
-#reloadBtn, #resource {
-    margin-left: 20%;
-    margin-right: 20%;
+#reloadBtn{
+    margin-left: 15%;
+    margin-right: 12%;
     border: none;
-    margin-top: calc(1.5em + 1.5px);
+    margin-top: calc(1em + 1.5px);
+    height: 2rem;
+    width: 21rem;
+    font-size: medium;
+    cursor: pointer;
+}
+
+#resource {
+    margin-left: 12%;
+    margin-right: 15%;
+    border: none;
+    margin-top: calc(1em + 1.5px);
+    height: 2rem;
+    width: 21rem;
+    font-size: medium;
+    cursor: pointer;
 }

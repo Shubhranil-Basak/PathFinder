@@ -12,7 +12,7 @@ PathFinder is an innovative tool designed to streamline the learning process for
 - [Usage](#usage)
 - [Implementation Details](#implementation-details)
     - [APIs Used](#apis-used)
-    - [Application Structure](#application-structure)
+    - [Project Structure](#project-structure)
 - [Challenges](#challenges)
 - [Future Scope](#future-scope)
 - [Contributions](#contributions)
@@ -109,7 +109,7 @@ streamlit run gemini.py
 1. **Gemini API**: The main API which generates the roadmap and the resource mardown file.
 2. **Youtube API**: This API is used to gather the Youtube video for news and tutorials regarding the topics.
 
-### Application Structure
+### Project Structure
 1. `generated_resources` folder stores all the resources gathered using the youtube API.
 2. `generated_roadmap` folder stores all the geerated roadmap made using the Gemini API and stores both the markdown and json format of the roadmap.
 3. `templates` folder stores the HTML file for the necessary webpages.
@@ -120,6 +120,9 @@ streamlit run gemini.py
 8. `YT.py` is responsible for making the API call for gathering the youtube video links to be displayed in the resources webpage.
 9. `.env` stores the environment variables (API Keys).
 10. `gemini.py` is used for using Gemini as a chatbot for questions ad answers reagrdning any topic.
+
+![PathFinder drawio (1)](https://github.com/user-attachments/assets/ce23a7b8-949a-4524-822a-cdf5f8b96e2b)
+
 
 ## Challenges
 

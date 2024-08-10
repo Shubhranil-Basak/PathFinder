@@ -41,7 +41,18 @@ model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest",
                               safety_settings=safety_settings)
 
 
+
+# Structured prompt for generating resources
 def generate_resources(topic, save_directory):
+  """
+  Generates a document containing important terms, techniques, and methods related to a given topic.
+  @params:
+    topic (str): The topic for which resources are generated.
+    save_directory (str): The directory where the generated document will be saved.
+  Returns:
+    None
+  """
+  
   prompt_parts = [
   "You are a expert in any topic asked to you. When asked, you will tell about the important terms, techniques and methods needed to learn that and other things needed to learn that topic. You try to not give out any links to external resources and try to handle things and explain them as much a possible on your own",
   "input: Artificial Intelligence",

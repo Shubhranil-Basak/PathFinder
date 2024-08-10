@@ -9,6 +9,15 @@ load_dotenv()
 api_key = os.environ.get("YTAPI")
 
 def tutorial_vid(topic, save_directory):
+    """
+    Searches for tutorial videos on YouTube based on the given topic and saves the video URLs in a JSON file.
+    @param:
+        topic (str): The topic to search for tutorial videos.
+        save_directory (str): The directory where the JSON file will be saved.
+    Returns:
+        None
+    """
+
     youtube = build('youtube', 'v3', developerKey=api_key)
     request = youtube.search().list(
         q=topic,
@@ -24,7 +33,7 @@ def tutorial_vid(topic, save_directory):
     videos = []
     for item in response['items']:
         video_id = item['id']['videoId']
-        video_url = f"https://www.youtube.com/embed/{video_id}"
+        video_url = f"https://www.youtube.com/embed/{video_id}" # Storing the video URL
         videos.append({"url": video_url})
     
     json_file_path = os.path.join(save_directory, f"{topic}.json")
@@ -32,6 +41,15 @@ def tutorial_vid(topic, save_directory):
         json.dump(videos, f)
 
 def news_vid(topic, save_directory):
+    """
+    Searches for YouTube videos related to a given topic and saves the video URLs in a JSON file.
+    @param:
+        topic (str): The topic to search for.
+        save_directory (str): The directory where the JSON file will be saved.
+    Returns:
+        None
+    """
+
     youtube = build('youtube', 'v3', developerKey=api_key)
     request = youtube.search().list(
         q=topic,

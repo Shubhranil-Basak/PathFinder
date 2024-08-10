@@ -42,9 +42,17 @@ model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest",
                               safety_settings=safety_settings)
 
 def parse_response_to_json(response_text):
-    # This function should parse the response text and convert it to a JSON structure.
-    # For simplicity, let's assume the response is already in a structured format.
-    # You might need to adjust this according to the actual response format.
+    """
+    Parses the response text and converts it to a JSON structure.
+    @param:
+        response_text (str): The response text to be parsed.
+    Returns:
+        list: A list representing the parsed JSON structure.
+    Example:
+        response_text = "### Section 1\n- Item 1\n- Item 2\n### Section 2\n- Item 3"
+        parse_response_to_json(response_text)
+        # Output: [{'title': 'Section 1', 'items': [{'title': 'Item 1', 'subitems': []}, {'title': 'Item 2', 'subitems': []}]}, {'title': 'Section 2', 'items': [{'title': 'Item 3', 'subitems': []}]}]
+    """
     lines = response_text.split('\n')
     roadmap = []
     current_section = None
@@ -75,7 +83,17 @@ def parse_response_to_json(response_text):
 
 
 
+# Strutured prompt parts for generating a roadmap
 def generate_roadmap(topic, save_directory):
+    """
+    Generates a roadmap for a given topic and saves it as a markdown file and a JSON file.
+    @param:
+        topic (str): The topic for which the roadmap is generated.
+        save_directory (str): The directory where the generated files will be saved.
+    Returns:
+        None
+    """
+
     prompt_parts = [
   "input: photography",
   "output: ### Photography\n\n1. **Photography Basics**\n   - Understanding Exposure (Aperture, Shutter Speed, ISO)\n   - Camera Types (DSLR, Mirrorless, Point-and-Shoot)\n   - Lens Types and Uses\n\n2. **Camera Settings and Controls**\n   - Manual Mode\n   - Aperture Priority Mode\n   - Shutter Priority Mode\n   - ISO Settings\n\n3. **Composition Techniques**\n   - Rule of Thirds\n   - Leading Lines\n   - Framing\n   - Symmetry and Patterns\n\n4. **Lighting Fundamentals**\n   - Natural Light\n   - Artificial Light\n   - Using Flash\n   - Reflectors and Diffusers\n\n5. **Focus and Depth of Field**\n   - Autofocus vs. Manual Focus\n   - Depth of Field Control\n   - Bokeh Effect\n\n6. **Shooting in Different Conditions**\n   - Low Light Photography\n   - Action and Sports Photography\n   - Landscape Photography\n   - Portrait Photography\n\n7. **Post-Processing Basics**\n   - Photo Editing Software (Adobe Lightroom, Photoshop)\n   - Basic Editing Techniques (Cropping, Exposure Adjustments)\n   - Color Correction and Grading\n\n8. **Advanced Editing Techniques**\n   - Retouching and Cloning\n   - HDR Photography\n   - Panorama Stitching\n   - Composite Imaging\n\n9. **Specialized Photography**\n   - Macro Photography\n   - Astrophotography\n   - Street Photography\n   - Wildlife Photography\n\n10. **Photography Equipment**\n    - Tripods and Stabilizers\n    - Filters (ND, Polarizers)\n    - External Flashes and Lighting Kits\n    - Camera Bags and Straps\n\n11. **Portfolio Development**\n    - Selecting Best Shots\n    - Creating a Cohesive Theme\n    - Building an Online Portfolio\n    - Printing and Framing Photographs\n\n12. **Professional Practices**\n    - Working with Clients\n    - Pricing and Contracts\n    - Marketing and Social Media\n    - Continuous Learning and Improvement",

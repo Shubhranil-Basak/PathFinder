@@ -6,7 +6,14 @@ from collections import deque
 GOOGLE_API_KEY = "AIzaSyDk0_7GU4FojcOW2Ko_Y2hh9OIK_XbE7-Y"
 genai.configure(api_key=GOOGLE_API_KEY)
 
+# Custom CSS for chat messages
 def load_custom_css():
+    """
+    Loads custom CSS styles for the chat messages.
+    Returns:
+        None
+    """
+    
     custom_css = """
     <style>
     /* Add your custom CSS here */
@@ -40,6 +47,14 @@ if "chat_history" not in st.session_state:
 
 # Function to call the Gemini API
 def call_gemini_api(user_input):
+    """
+    Calls the Gemini API to generate content based on the user input.
+    @param:
+        user_input (str): The input provided by the user.
+    Returns:
+        str: The generated content from the Gemini API.
+    """
+
     model = genai.GenerativeModel('gemini-1.5-flash')
     response = model.generate_content(user_input)
     return response.text

@@ -2,4 +2,4 @@ flask
 dotenv
 google-api-python-client
 streamlit
-PIL
+pillow
